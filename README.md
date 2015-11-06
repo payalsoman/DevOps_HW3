@@ -110,6 +110,44 @@ app.get('/meow',function(req, res) {
 });
 ```
 
-#### Proxy server
+#### Additional Instance and Proxy Server
+
+The file proxyserver.js runs the server on port 3000 once and then on port 3001 and alternates so on.
+```
+client.lrange('servers',0,-1,function(err,serverVar){
+    if (err) throw err
+    //console.log(serverVar);
+    //console.log(serverVar.length);
+    if(serverVar.length==0){
+      client.rpush(['servers', 3000,3001], function(err, reply) {
+          console.log("added servers"+reply); //prints 2
+      });
+    }
+})
+
+
+var server = app.listen(3006, function () {
+
+    var host = server.address().address
+    var port = server.address().port    
+    console.log('Example app listening at http://%s:%s', host, port)
+})
+
+app.get('/', function(req, res) {
+
+  
+  client.rpoplpush('servers', 'servers', function(err, reply) {
+      //console.log("rpoplpush servers"); //prints 2      
+  });
+  
+  client.lrange('servers',0,0,function(err,serverVar){
+    if (err) throw err
+    nextServer = serverVar;
+    //console.log("nextServer is "+nextServer)
+  })
+```
+
+#### Screencast:
+
 
 
