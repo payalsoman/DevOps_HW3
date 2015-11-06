@@ -11,9 +11,10 @@
   "devDependencies": {
     "express": "^4.12.3",
     "multer": "^0.1.8",
-    "redis": "^0.12.1"
+    "redis": "^0.12.1",
+    "request": "^2.65.0"
   },
   "dependencies": {
-    "express": "~4.13.3"
+    "http-proxy": "^1.12.0"
   }
 }
