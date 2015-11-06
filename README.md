@@ -149,5 +149,5 @@ app.get('/', function(req, res) {
 
 #### Screencast:
 
-
+https://github.com/payalsoman/DevOps_HW3/blob/master/hw3_payal.gif
 
